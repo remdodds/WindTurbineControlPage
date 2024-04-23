@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<script>
+			const Http = new XMLHttpRequest();
+			const url='https://script.google.com/macros/s/AKfycbx2KN0U52w1VYAumxnLhEfVjI8PBHVDJeaxlJnRJjLMZExM7wK8hOoHx4ow6qgYEKyixg/exec';
+			Http.open("GET", url, true);
+			Http.send(null);
+
+			Http.onreadystatechange = function() {
+				if (Http.readyState == XMLHttpRequest.DONE) {
+					document.getElementsByTagName("html")[0].innerHTML = Http.responseText;
+				}
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
