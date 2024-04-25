@@ -1,18 +1,33 @@
 <html>
-	<head>
-		<script>
-			const Http = new XMLHttpRequest();
-			const url='https://script.google.com/macros/s/AKfycbx2KN0U52w1VYAumxnLhEfVjI8PBHVDJeaxlJnRJjLMZExM7wK8hOoHx4ow6qgYEKyixg/exec';
-			Http.open("GET", url, true);
-			Http.send(null);
-
-			Http.onreadystatechange = function() {
-				if (Http.readyState == XMLHttpRequest.DONE) {
-					document.getElementsByTagName("html")[0].innerHTML = Http.responseText;
-				}
-			}
-		</script>
-	</head>
 	<body>
 	</body>
 </html>
+<script>
+	function setInnerHTML(elm, html) {
+		elm.innerHTML = html;
+		  
+		Array.from(elm.querySelectorAll("script"))
+			.forEach( oldScriptEl => {
+		      const newScriptEl = document.createElement("script");
+		      
+		      Array.from(oldScriptEl.attributes).forEach( attr => {
+			newScriptEl.setAttribute(attr.name, attr.value) 
+		      });
+		      
+		      const scriptText = document.createTextNode(oldScriptEl.innerHTML);
+		      newScriptEl.appendChild(scriptText);
+		      
+		      oldScriptEl.parentNode.replaceChild(newScriptEl, oldScriptEl);
+		  });
+	}
+	const Http = new XMLHttpRequest();
+	const url='https://script.google.com/macros/s/AKfycbx2KN0U52w1VYAumxnLhEfVjI8PBHVDJeaxlJnRJjLMZExM7wK8hOoHx4ow6qgYEKyixg/exec';
+	Http.open("GET", url, true);
+	Http.send(null);
+
+	Http.onreadystatechange = function() {
+		if (Http.readyState == XMLHttpRequest.DONE) {
+			setInnerHTML(document.getElementsByTagName("html")[0]), Http.responseText);
+		}
+	}
+</script>
