@@ -27,7 +27,7 @@
 
 	Http.onreadystatechange = function() {
 		if (Http.readyState == XMLHttpRequest.DONE) {
-			setInnerHTML(document.getElementsByTagName("html")[0]), Http.responseText);
+			setInnerHTML(document.getElementsByTagName("html")[0], Http.responseText);
 		}
 	}
 </script>
